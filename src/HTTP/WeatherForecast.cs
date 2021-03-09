@@ -1,6 +1,6 @@
 using System;
 
-namespace WidgetMarketplace
+namespace Http
 {
 	public class WeatherForecast
 	{
