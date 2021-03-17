@@ -4,5 +4,8 @@ using Store.AccountLedgerStore;
 
 namespace Store.Application
 {
-    public record GetAccountBalance(DateTime Timestamp, Guid OwnerId) : Command(Timestamp), ICommand<AccountLedgerState>;
+    public record GetAccountBalance : Command, ICommand<AccountLedgerState>
+    {
+        public Guid OwnerId { get; set; }
+    }
 }

@@ -11,10 +11,10 @@ namespace Store.Application
 {
     public class GetStockHandler : IInMemoryCommandHandler<GetStock, StoreFrontState>
     {
-        private ILogger<GetBalanceHandler> _logger;
+        private ILogger<GetStockHandler> _logger;
         private IEventStoreHydrator<Guid, StoreFrontEventStore> _hydrator;
 
-        public GetStockHandler(ILogger<GetBalanceHandler> logger, IEventStoreHydrator<Guid, StoreFrontEventStore> hydrator)
+        public GetStockHandler(ILogger<GetStockHandler> logger, IEventStoreHydrator<Guid, StoreFrontEventStore> hydrator)
         {
             _logger = logger;
             _hydrator = hydrator;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Core.Messaging;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,8 +12,11 @@ namespace Core
     /// </summary>
     public static class IocExtensions
     {
-        public static void AddMediator<T>(this IServiceCollection services) =>
+        public static IServiceCollection AddMediator<T>(this IServiceCollection services) =>
             services.AddMediatR(typeof(T).GetTypeInfo().Assembly);
+
+        public static IServiceCollection AddInMemoryBus(this IServiceCollection services) =>
+            services.AddSingleton<IInMemoryBus, InMemoryMessenger>();
     }
 
 }

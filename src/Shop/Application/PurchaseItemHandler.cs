@@ -38,7 +38,7 @@ namespace Store.Application
         private Task<Result<StoreFrontState>> WhenStrategyExists(CommandStrategy<StoreFrontContext> strategy, PurchaseItem request) =>
             _hydrator
                 .Hydrate(request.OwnerId)
-                .Bind(store => store.Handle(new (null, request, null), strategy))
+                .Bind(store => store.Handle(new StoreFrontContext{Command = request}, strategy))
                 .Map(result => result.Event.Match(e =>
                 {
                     _bus.Publish(e);

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Core.Data;
 using LanguageExt;
@@ -13,11 +12,11 @@ namespace UserManagement.UserStore
     public class Hydrator : IEventStoreHydrator<Guid, UserEventStore>
     {
         private readonly ILogger<IEventStoreHydrator<Guid, UserEventStore>> _logger;
-        private readonly IDataContext<IEnumerable<UserEvent>> _storeContext;
+        private readonly IEventStoreContext<Guid, UserEvent> _storeContext;
         private readonly Func<UserState, UserEvent, UserState> _reducer;
 
         public Hydrator(ILogger<IEventStoreHydrator<Guid, UserEventStore>> logger, 
-            IDataContext<IEnumerable<UserEvent>> storeContext,
+            IEventStoreContext<Guid, UserEvent> storeContext,
             Func<UserState, UserEvent, UserState> reducer
             )
         {
@@ -30,8 +29,9 @@ namespace UserManagement.UserStore
             _storeContext.Get(userId)
                 .Map(events => events switch
                 {
-                    { } list when !list.Any() => new UserEventStore(events.Append(new UserInitialized(userId)), _reducer),
-                    { } list when list.Any() => new UserEventStore(events, _reducer)
+                    { } list when !list.Any() => new UserEventStore(events.Append(new UserInitialized{Id = userId}), _reducer),
+                    { } list when list.Any() => new UserEventStore(events, _reducer),
+                    _ => throw new ArgumentOutOfRangeException(nameof(events), events, null)
                 });
     }
 }

@@ -3,5 +3,5 @@ using Store.Application;
 
 namespace Store.StoreFrontStore
 {
-    public record ItemAddedToShop(DateTime Timestamp, Guid ItemId, Guid UserId) : StoreFrontEvent(Timestamp);
+    public record ItemAddedToShop(Guid ItemId, Guid UserId) : StoreFrontEvent;
 }

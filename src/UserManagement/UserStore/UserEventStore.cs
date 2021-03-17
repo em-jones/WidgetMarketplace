@@ -18,9 +18,9 @@ namespace UserManagement.UserStore
             UserCommandContext context,
             CommandStrategy<UserCommandContext> strategy
         ) =>
-            ApplyStrategy(context with {State = CurrentState(new UserState(Guid.Empty))}, strategy)
+            ApplyStrategy(context with {State = CurrentState(new UserState())}, strategy)
                 .Map(RecordEvent);
         
-        public override Option<UserState> Get() => CurrentState(new UserState(Guid.Empty));
+        public override Option<UserState> Get() => CurrentState(new UserState());
     }
 }

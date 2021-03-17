@@ -25,7 +25,7 @@ namespace UserManagement.Application
 
         public Task<UserState> Handle(GetUser request, CancellationToken cancellationToken) =>
             _hydrator.Hydrate(request.Id).Bind(store => store.Get().ToTryAsync())
-                .Match(state => state, _ => new (Guid.Empty));
+                .Match(state => state, _ => new UserState());
     }
 
     public class UserDoesNotExistException : Exception

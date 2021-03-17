@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LanguageExt.Common;
+using Microsoft.Extensions.Logging;
 
 namespace Core
 {
@@ -14,5 +15,14 @@ namespace Core
             Func<TResult, TItem, TResult> reducer, TResult seed) => messages.Aggregate(seed, reducer);
 
         public static T Identity<T>(T item) => item;
+
+        public static void LogAndThrow<T>(this ILogger<T> logger, LogLevel level, Func<Exception> e,
+            Func<string> messageBuilder)
+        {
+            Exception ex = e();
+            logger.Log(level, e(), messageBuilder());
+            throw ex;
+        }
+
     }
 }

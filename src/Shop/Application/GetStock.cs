@@ -4,5 +4,8 @@ using Store.StoreFrontStore;
 
 namespace Store.Application
 {
-    public record GetStock(DateTime Timestamp, Guid OwnerId) : Command(Timestamp), ICommand<StoreFrontState>;
+    public record GetStock : Command, ICommand<StoreFrontState>
+    {
+        public Guid OwnerId { get; set; }
+    }
 }

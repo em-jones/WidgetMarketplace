@@ -20,8 +20,10 @@ namespace UserManagement.Application
         private readonly ILogger<CreateUserHandler> _logger;
         private readonly IEventStoreHydrator<Guid, UserEventStore> _hydrator;
         private readonly IInMemoryBus _bus;
-        public CreateUserHandler(ILogger<CreateUserHandler> logger, IEventStoreHydrator<Guid, UserEventStore> hydrator, 
-            ICommandStrategyFactory<UserCommandContext> commandStrategyFactory, IInMemoryBus bus)
+        public CreateUserHandler(ILogger<CreateUserHandler> logger, 
+            IEventStoreHydrator<Guid, UserEventStore> hydrator, 
+            ICommandStrategyFactory<UserCommandContext> commandStrategyFactory, 
+            IInMemoryBus bus)
         {
             _strategy = commandStrategyFactory.Get<CreateUser>();
             _logger = logger;
@@ -39,7 +41,7 @@ namespace UserManagement.Application
             CreateUser request) =>
             _hydrator
                 .Hydrate(Guid.NewGuid())
-                .Bind(store => store.Handle(new (null, request, null), strategy))
+                .Bind(store => store.Handle(new UserCommandContext {Command =  request}, strategy))
                 .Map(result => result.Event.Match(e =>
                 {
                     _bus.Publish(e);

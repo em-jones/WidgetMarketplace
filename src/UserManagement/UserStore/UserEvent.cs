@@ -3,5 +3,9 @@ using Core.Messaging;
 
 namespace UserManagement.UserStore
 {
-    public record UserEvent(Guid Id, DateTime TimeStamp) : Message(TimeStamp);
+    [Serializable]
+    public record UserEvent : Message
+    {
+        public Guid Id { get; set; }
+    }
 }

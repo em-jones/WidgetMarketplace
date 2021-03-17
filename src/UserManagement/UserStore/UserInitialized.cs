@@ -1,6 +1,4 @@
-using System;
-
 namespace UserManagement.UserStore
 {
-    public record UserInitialized(Guid Id) : UserEvent(Id, DateTime.Now);
+    public record UserInitialized : UserEvent;
 }

@@ -3,6 +3,12 @@ using Core.Messaging;
 
 namespace UserManagement.UserStore
 {
-    public record UserCreated(Guid Id, string FirstName, string LastName, string Email, DateTime Timestamp) 
-        : UserEvent(Id, Timestamp), IEvent;
+    [Serializable]
+    public record UserCreated
+        : UserEvent, IEvent
+    {
+        public string FirstName { get; set; }   
+        public string LastName { get; set; }
+        public string Email { get; set; }
+    }
 }

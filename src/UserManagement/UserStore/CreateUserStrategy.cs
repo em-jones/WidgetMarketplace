@@ -13,8 +13,11 @@ namespace UserManagement.UserStore
         private static UserCreated CreateUserIfNoneExist(Option<UserState> user, CreateUser command) =>
             user.Match(
                 s => throw new UserExistsException($"User with email {s.Email} already exists"),
-                () => new UserCreated(Guid.NewGuid(), command.FirstName, command.LastName, command.Email,
-                    command.Timestamp)
+                () => new UserCreated
+                {
+                    Id = Guid.NewGuid(), FirstName = command.FirstName, LastName = command.LastName,
+                    Email = command.Email, Timestamp = command.Timestamp
+                }
             );
 
         internal static readonly CommandStrategy<UserCommandContext> Strategy = context => context.Command switch

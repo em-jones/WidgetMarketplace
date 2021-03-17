@@ -1,6 +1,4 @@
-using System;
-
 namespace Core.Messaging
 {
-    public record Command(DateTime Timestamp) : Message(Timestamp);
+    public record Command : Message;
 }

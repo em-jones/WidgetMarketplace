@@ -1,10 +1,14 @@
 using System;
-using System.Collections.Generic;
 
 namespace UserManagement.UserStore
 {
-    public record UserState(Guid id, 
-        string FirstName = "", 
-        string LastName = "", 
-        string Email = "");
+    [Serializable]
+    public record UserState
+    {
+        public Guid Id { get; set; } = Guid.Empty;
+        public Guid id { get; set; } = Guid.Empty;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+    }
 }

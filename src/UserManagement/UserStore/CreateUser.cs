@@ -7,11 +7,10 @@ namespace UserManagement.UserStore
 {
     public record CreateUser(string FirstName,
         string LastName,
-        string Email,
-        DateTime Timestamp) :
-        UserCommand(Timestamp), ICommand<UserState>
+        string Email) :
+        UserCommand, ICommand<UserState>
     {
-        public CreateUser() : this("","", "", DateTime.Now.ToUniversalTime())
+        public CreateUser() : this("","", "")
         {
         }
         [JsonIgnore]

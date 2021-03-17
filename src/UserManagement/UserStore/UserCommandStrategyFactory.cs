@@ -6,7 +6,7 @@ using LanguageExt;
 
 namespace UserManagement.UserStore
 {
-    public class StrategyFactory : AbstractCommandStrategyFactory, ICommandStrategyFactory<UserCommandContext>
+    public class UserCommandStrategyFactory : AbstractCommandStrategyFactory, ICommandStrategyFactory<UserCommandContext>
     {
         private static IDictionary<Type, CommandStrategy<UserCommandContext>> Handlers = _handlers(new List<(Type, CommandStrategy<UserCommandContext>)>
         {

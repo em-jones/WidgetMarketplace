@@ -5,6 +5,6 @@ using Core.Messaging;
 namespace Store.StoreFrontStore
 {
     public record AddItemToStoreFront
-        (Guid ItemId, Guid StoreFrontId, Amount Amount, DateTime Timestamp) 
-            : ItemCommand(Timestamp), ICommand<StoreFrontState>;
+        (Guid ItemId, Guid StoreFrontId, Amount Amount) 
+            : ItemCommand, ICommand<StoreFrontState>;
 }

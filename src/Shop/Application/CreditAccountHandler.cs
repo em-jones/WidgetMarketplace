@@ -36,7 +36,7 @@ namespace Store.Application
         private Task<Result<AccountLedgerState>>
             GetStoreAndApply(CommandStrategy<AccountLedgerContext> strategy, CreditAccount request) =>
             _hydrator.Hydrate(request.AccountOwnerId)
-                .Bind(store => store.Handle(new(null, request, null), strategy))
+                .Bind(store => store.Handle(new AccountLedgerContext{Command = request}, strategy))
                 .Map(result => result.State
                 ).Invoke();
 

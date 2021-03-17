@@ -4,6 +4,5 @@ using Store.StoreFrontStore;
 
 namespace Store.Application
 {
-    public record StoreFrontContext(StoreFrontState State, StoreFrontCommand Command, Option<StoreFrontEvent> Event) : 
-        CommandContext<StoreFrontState, StoreFrontCommand, StoreFrontEvent>(State, Command, Event);
+    public record StoreFrontContext : CommandContext<StoreFrontState, StoreFrontCommand, StoreFrontEvent>;
 }

@@ -1,7 +1,6 @@
 using System;
 using Core.Domain;
 using Core.Domain.Types;
-using Core.Messaging;
 using LanguageExt;
 
 namespace Store.AccountLedgerStore
@@ -14,10 +13,4 @@ namespace Store.AccountLedgerStore
 
         public override Option<AccountLedgerState> Get() => CurrentState(new AccountLedgerState(Guid.Empty, 0));
     }
-
-    public record AccountLedgerContext(AccountLedgerState State, AccountLedgerCommand Command, Option<AccountLedgerEvent> Event) : 
-        CommandContext<AccountLedgerState, AccountLedgerCommand, AccountLedgerEvent>(
-        State, Command, Event);
-
-    public record AccountLedgerEvent(DateTime Timestamp) : Message(Timestamp), IEvent;
 }

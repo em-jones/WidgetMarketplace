@@ -2,6 +2,9 @@ using System;
 
 namespace Core.Messaging
 {
-    public record Message(DateTime Timestamp);
+    public record Message
+    {
+        public DateTime Timestamp { get; set; } = DateTime.Now.ToUniversalTime();
+    }
     
 }
